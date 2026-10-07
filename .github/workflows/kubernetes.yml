@@ -1,0 +1,14 @@
+name: Kubernetes Manifest Validation
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-kubectl@v4
+      - name: Client-side validation
+        run: kubectl apply --dry-run=client -f k8s/
